@@ -3,12 +3,12 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import PropTypes from "prop-types";
 
-Registration.propTypes = {
-    toggleLoginForm: PropTypes.func,
-    handleLogin: PropTypes.func
-}
-
 export const Registration = ({ ...props }) => {
+
+    Registration.propTypes = {
+        toggleLoginForm: PropTypes.func,
+        handleLogin: PropTypes.func
+    }
 
     return (
         <form onSubmit={props.handleLogin}>
@@ -25,4 +25,6 @@ export const Registration = ({ ...props }) => {
         </form>
     )
 };
+
+
 

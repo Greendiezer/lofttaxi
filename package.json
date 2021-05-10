@@ -8,6 +8,7 @@
     "@testing-library/jest-dom": "^5.12.0",
     "@testing-library/react": "^11.2.6",
     "@testing-library/user-event": "^12.8.3",
+    "anymatch": "^3.1.2",
     "bootstrap": "^4.6.0",
     "loft-taxi-mui-theme": "^1.2.0",
     "mapbox-gl": "^2.2.0",

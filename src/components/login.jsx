@@ -3,12 +3,13 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import PropTypes from "prop-types";
 
-Login.propTypes = {
-    toggleLoginForm: PropTypes.func,
-    handleLogin: PropTypes.func
-}
-
 export const Login = ({...props}) => {
+
+    Login.propTypes = {
+        toggleLoginForm: PropTypes.func,
+        handleLogin: PropTypes.func
+    }
+
     return (
         <form onSubmit={props.handleLogin}>
             <TextField id="email" label="Standard" name="email" type="email"/>
