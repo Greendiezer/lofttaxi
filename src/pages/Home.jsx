@@ -1,8 +1,9 @@
 import React from 'react';
-import {withAuth} from '../helpers/AuthContext';
+import {connect} from 'react-redux';
 import { Login } from '../components/login';
 import { Registration } from '../components/registration';
-import Button from '@material-ui/core/Button';
+import {authenticate} from '../actions/actions'
+import {Link} from 'react-router-dom';
 import PropTypes from "prop-types";
 
 class Home extends React.Component {
@@ -17,16 +18,12 @@ class Home extends React.Component {
         isOldUser: true
     }
 
-    goToProfile = () => {
-        this.props.selectPage('profile');
-    };
 
     handleLogin = (e) => {
         e.preventDefault();
 
         const {email, password} = e.target
-        this.props.logIn(email.value, password.value)
-        // props.selectPage('map');
+        this.props.authenticate(email.value, password.value)
     };
 
     toggleLoginForm = () => {
@@ -38,7 +35,8 @@ class Home extends React.Component {
             <>
                 {this.props.isLoggedIn ? (
                     <p>
-                        You are logged in <Button onClick={this.goToProfile}>go to profile</Button>
+                        You are logged in 
+                        <Link to="/profile">Go to profile</Link>
                     </p>
                 ) : (
                     this.state.isOldUser ?
@@ -51,6 +49,10 @@ class Home extends React.Component {
     }
 }
 
+const mapStateToProps = (state) => ({ isLoggedIn: state.auth.isLoggedIn });
+const mapDispatchToProps = { authenticate }
 
-
-export const HomeWithAuth = withAuth(Home);
+export const HomeWithAuth = connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(Home);

@@ -3,8 +3,10 @@ import Map from './pages/Map';
 import { HomeWithAuth } from './pages/Home';
 import {ProfileWithAuth} from './pages/Profile';
 import Header from './components/header';
-import {withAuth} from './helpers/AuthContext';
 import PropTypes from "prop-types";
+import {connect} from 'react-redux'
+import {Switch, Route} from 'react-router-dom'
+import {PrivateRoute} from './components/PrivateRoute'
 import './App.css';
 
 class App extends React.Component {
@@ -12,18 +14,17 @@ class App extends React.Component {
     isLoggedIn: PropTypes.bool
   }
   
-  state = {  
-    activePage:'home'
-  }
+  // state = {  
+  //   activePage:'home'
+  // }
 
-  selectPage = (page) => {
-    if (this.props.isLoggedIn) {
-      this.setState({activePage: page})
-    } else {
-      this.setState({activePage: "home"})
-    }
-    
-  };
+  // selectPage = (page) => {
+  //   if (this.props.isLoggedIn) {
+  //     this.setState({activePage: page})
+  //   } else {
+  //     this.setState({activePage: "home"})
+  //   }  
+  // };
   
   
   render() { 
@@ -32,13 +33,12 @@ class App extends React.Component {
         {this.props.isLoggedIn ? <Header selectPage={this.selectPage}/> : null}
         <main>
           <section>
-            {
-              {
-                map: <Map {...this.props}/>,
-                profile: <ProfileWithAuth selectPage={this.selectPage} {...this.props}/>,
-                home: <HomeWithAuth selectPage={this.selectPage} {...this.props}/>
-              }[this.state.activePage]
-            }
+            <Switch>
+              <Route exact path="/" component={HomeWithAuth} {...this.props}/>
+              <PrivateRoute  path="/map" component={Map} {...this.props} />
+              <PrivateRoute  path="/profile" component={ProfileWithAuth} {...this.props}/>
+            </Switch>
+
           </section>
         </main>
       </>
@@ -46,6 +46,8 @@ class App extends React.Component {
   }
 }
 
-export default withAuth(App);
+export default connect(
+  state => ({isLoggedIn: state.auth.isLoggedIn})
+)(App);
 
 

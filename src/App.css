@@ -41,3 +41,26 @@
 main {
   margin-top: 100px;
 }
+
+.card__block{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.card__form {
+  display: flex;
+  flex-direction: column;
+  /* width: 600px; */
+}
+
+.card__field {
+  display: block;
+}
+
+.profile__block {
+  width: 700px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
