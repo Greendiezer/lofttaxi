@@ -14,19 +14,6 @@ class App extends React.Component {
     isLoggedIn: PropTypes.bool
   }
   
-  // state = {  
-  //   activePage:'home'
-  // }
-
-  // selectPage = (page) => {
-  //   if (this.props.isLoggedIn) {
-  //     this.setState({activePage: page})
-  //   } else {
-  //     this.setState({activePage: "home"})
-  //   }  
-  // };
-  
-  
   render() { 
     return (
       <>

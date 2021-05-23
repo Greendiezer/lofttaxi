@@ -11,9 +11,10 @@ export const Registration = ({ ...props }) => {
     }
 
     return (
-        <form onSubmit={props.handleLogin}>
+        <form onSubmit={props.handleRegistration}>
             <TextField required id="email" label="Email" defaultValue="mail@mail.ru" />
-            <TextField required id="firstname" label="Как вас зовут?" defaultValue="Петр Александрович" />
+            <TextField required id="name" label="Имя" defaultValue="Петр" />
+            <TextField required id="surname" label="Фамилия" defaultValue="Александрович" />
             <TextField
                 id="password"
                 label="Password"

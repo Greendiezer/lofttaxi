@@ -9,6 +9,7 @@
     "@testing-library/user-event": "^12.8.3",
     "anymatch": "^3.1.2",
     "bootstrap": "^4.6.0",
+    "history": "^5.0.0",
     "loft-taxi-mui-theme": "^1.2.0",
     "mapbox-gl": "^2.2.0",
     "prop-types": "^15.7.2",
@@ -49,6 +50,7 @@
     "@testing-library/react": "^11.2.6",
     "@testing-library/react-hooks": "^5.1.2",
     "cz-conventional-changelog": "^3.3.0",
+    "enzyme-adapter-preact-pure": "^3.1.0",
     "jest": "^26.6.0"
   },
   "config": {

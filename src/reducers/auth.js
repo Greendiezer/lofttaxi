@@ -1,4 +1,4 @@
-import {LOG_IN, LOG_OUT, LOG_IN_ERROR} from '../actions/actions'
+import {LOG_IN, LOG_OUT, LOG_IN_ERROR, REGISTER, REGISTER_ERROR} from '../actions/actions'
 
 const initialState = {
     isLoggedIn: !!localStorage.getItem('token'),
@@ -16,6 +16,9 @@ export default function(state = initialState, action) {
         }
         case LOG_OUT: {
             return{...state, isLoggedIn: false, token: ''}
+        }
+        case REGISTER_ERROR: {
+            return{...state, isLoggedIn: false, token: '', error: action.payload}
         }
         default:
             return state

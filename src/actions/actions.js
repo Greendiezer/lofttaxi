@@ -7,6 +7,9 @@ export const GET_CARD_SUCCESS = 'GET_CARD_SUCCESS'
 export const GET_CARD_FAILURE = 'GET_CARD_FAILURE'
 export const CHANGE_CARD = 'CHANGE_CARD'
 export const CHANGE_CARD_SUCCESS = 'CHANGE_CARD_SUCCESS'
+export const REGISTER = 'REGISTER'
+export const REGISTER_SUCCESS = 'REGISTER'
+export const REGISTER_ERROR = 'REGISTER'
 
 export const logIn = (token) => ({type: LOG_IN, payload: token})
 export const logOut = () => ({type: LOG_OUT})
@@ -50,4 +53,20 @@ export const changeCardSuccess = ({cardNumber, expiryDate, cardName, cvc}) => ({
         cardName,
         cvc
     }
+})
+
+export const register = (email, password, name, surname) => ({
+    type: REGISTER,
+    payload: {
+        email,
+        password, 
+        name, 
+        surname
+    }
+})
+
+
+export const registerFailure = (error) => ({
+    type: REGISTER_ERROR,
+    payload: error
 })

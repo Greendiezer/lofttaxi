@@ -1,9 +1,7 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from "prop-types";
 import {connect} from 'react-redux';
-import {logOut} from '../actions/actions'
-import {getCard} from '../actions/actions'
-import {changeCard} from '../actions/actions'
+import {logOut, getCard, changeCard} from '../actions/actions'
 import { Input, TextField, Card, Paper, Button} from '@material-ui/core';
 
 const Profile = ({ token, cardData, error, isLoading, getCard, unauthenticate, logOut, changeCard}) => {
@@ -11,10 +9,29 @@ const Profile = ({ token, cardData, error, isLoading, getCard, unauthenticate, l
         getCard(token);
     }, [token])
 
+    const [cardName, setCardName] = useState('')
+    const [cardNumber, setCardNumber] = useState('')
+    const [expiryDate, setExpiryDate] = useState('')
+    const [cvc, setCvc] = useState('')
+
+    useEffect(() => {
+        if (cardData.cardName) {
+            setCardName(cardData.cardName)
+        }
+        if (cardData.cardNumber) {
+            setCardNumber(cardData.cardNumber)
+        }
+        if (cardData.expiryDate) {
+            setExpiryDate(cardData.expiryDate)
+        }
+        if (cardData.cvc) {
+            setCvc(cardData.cvc)
+        }
+    }, [cardData.cardName, cardData.cardNumber, cardData.expiryDate, cardData.cvc])
+
     const handlePostCardData = (event) => {
         event.preventDefault();
-        const {cardNumber, expiryDate, cardName, cvc} = event.target
-        changeCard({ cardNumber: cardNumber.value, expiryDate: expiryDate.value, cardName: cardName.value, cvc: cvc.value, token: token})
+        changeCard({ cardNumber, expiryDate, cardName, cvc, token })
     }
 
     unauthenticate = () => {
@@ -32,10 +49,10 @@ const Profile = ({ token, cardData, error, isLoading, getCard, unauthenticate, l
                     <div className="card__block">
                         <div className="card__area_left">
                             <form className="card__form" onSubmit={handlePostCardData}>                                
-                                <TextField  className="card__field" required label="Имя владельца" name="cardName" placeholder={cardData.cardName}/>
-                                <TextField  className="card__field" required id="cardNumber" label="Номер карты" name="cardNumber" placeholder={cardData.cardNumber}/>
-                                <TextField  className="card__field" required id="expiryDate" label="MM/YY" name="expiryDate" placeholder={cardData.expiryDate}/>
-                                <TextField  className="card__field" required id="cvc" label="CVC" name="cvc" placeholder={cardData.cvc}/>
+                                <TextField className="card__field" required label="Имя владельца" name="cardName" value={cardName} onChange={e => setCardName(e.target.value)}/>
+                                <TextField className="card__field" required id="cardNumber" label="Номер карты" name="cardNumber" value={cardNumber} onChange={e => setCardNumber(e.target.value)}/>
+                                <TextField className="card__field" required id="expiryDate" label="MM/YY" name="expiryDate" value={expiryDate} onChange={e => setExpiryDate(e.target.value)}/>
+                                <TextField className="card__field" required id="cvc" label="CVC" name="cvc" value={cvc} onChange={e => setCvc(e.target.value)}/>
                                 <Button type="submit">Сохранить</Button>
                             </form>
                         </div>
