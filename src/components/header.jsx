@@ -5,6 +5,8 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import { Link } from 'react-router-dom'
 import PropTypes from "prop-types";
+import {Logo, MCIcon} from 'loft-taxi-mui-theme';
+import "../stylesheets/header.css"
 
 class Header extends React.Component {
 
@@ -15,20 +17,22 @@ class Header extends React.Component {
     render() { 
         return ( 
             <>
-            <AppBar>
-                <Toolbar>
-                    <Typography variant="h6">
-                                        Loft Taxi
-                    </Typography>
-                        <Link to="/">
-                            Логин
+            <AppBar color="primary" id="header">
+                <Toolbar className="header__block">
+                    <div className="header__logo">
+                        <Logo />
+                    </div>
+                    <nav className="header__menu">
+                        <Link to="/" className="header__link">
+                            <Button aria-disabled="false">Логин</Button>
                         </Link>
-                        <Link to="/map">
-                            Карта
+                        <Link to="/map" className="header__link">
+                            <Button >Карта</Button>
                         </Link>
-                        <Link to="/profile">
-                            Профиль
+                        <Link to="/profile" className="header__link">
+                            <Button >Профиль</Button>
                         </Link>
+                    </nav>
                 </Toolbar>
 
             </AppBar>

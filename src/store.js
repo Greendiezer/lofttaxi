@@ -1,12 +1,13 @@
 import {createStore, applyMiddleware} from 'redux';
 import rootReducer from './reducers';
-import {authMiddleware} from './middleware/authMiddleware'
-import {getCardMiddleware} from './middleware/getCardMiddleware'
 import { composeWithDevTools } from 'redux-devtools-extension';
-import { postCardDataMiddleware } from './middleware/postCardMiddleware';
+import createSagaMiddleware from 'redux-saga'
+import rootSaga from './sagas'
 
+const sagaMiddleware = createSagaMiddleware()
 
 export const store = createStore(
     rootReducer, 
-    composeWithDevTools(applyMiddleware(authMiddleware, getCardMiddleware, postCardDataMiddleware))
+    composeWithDevTools(applyMiddleware(sagaMiddleware))
 )
+sagaMiddleware.run(rootSaga)

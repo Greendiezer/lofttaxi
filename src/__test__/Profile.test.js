@@ -18,7 +18,7 @@ describe("Profile", ()=>{
             getState: () => ({
                 auth: {isLoggedIn: true, token: "123"},
                 card: {
-                    data: {id: '', cardNumber: '', expiryDate: '', cardName: '', cvc: ''},
+                    data: {id: '1', cardNumber: '12345', expiryDate: '12/22', cardName: 'testname', cvc: '123'},
                     isLoading: false,
                     error: ""
                     }

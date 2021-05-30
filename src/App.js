@@ -1,5 +1,5 @@
 import React from 'react';
-import Map from './pages/Map';
+import Map, { MapWithAuth } from './pages/Map';
 import { HomeWithAuth } from './pages/Home';
 import {ProfileWithAuth} from './pages/Profile';
 import Header from './components/header';
@@ -22,7 +22,7 @@ class App extends React.Component {
           <section>
             <Switch>
               <Route exact path="/" component={HomeWithAuth} {...this.props}/>
-              <PrivateRoute  path="/map" component={Map} {...this.props} />
+              <PrivateRoute  path="/map" component={MapWithAuth} {...this.props} />
               <PrivateRoute  path="/profile" component={ProfileWithAuth} {...this.props}/>
             </Switch>
 

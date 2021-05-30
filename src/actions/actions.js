@@ -10,6 +10,12 @@ export const CHANGE_CARD_SUCCESS = 'CHANGE_CARD_SUCCESS'
 export const REGISTER = 'REGISTER'
 export const REGISTER_SUCCESS = 'REGISTER'
 export const REGISTER_ERROR = 'REGISTER'
+export const GET_ADDRESS_LIST = 'GET_ADDRESS_LIST'
+export const GET_ADDRESS_LIST_SUCCESS = 'GET_ADDRESS_LIST_SUCCESS'
+export const GET_ADDRESS_LIST_FAILURE = 'GET_ADDRESS_LIST_FAILURE'
+export const GET_ROUTE = 'GET_ROUTE'
+export const GET_ROUTE_SUCCESS = 'GET_ROUTE_SUCCESS'
+export const GET_ROUTE_FAILURE = 'GET_ROUTE_FAILURE'
 
 export const logIn = (token) => ({type: LOG_IN, payload: token})
 export const logOut = () => ({type: LOG_OUT})
@@ -68,5 +74,35 @@ export const register = (email, password, name, surname) => ({
 
 export const registerFailure = (error) => ({
     type: REGISTER_ERROR,
+    payload: error
+})
+
+export const getAddressList = () => ({
+    type: GET_ADDRESS_LIST
+})
+
+export const getAddressListSuccess = ({addresses}) => ({
+    type: GET_ADDRESS_LIST_SUCCESS,
+    payload: {addresses}
+})
+
+export const getAddressListFailure = (error) => ({
+    type: GET_ADDRESS_LIST_FAILURE,
+    payload: error
+})
+
+export const getRoute = ({address1, address2}) => ({
+    type: GET_ROUTE,
+    payload: {
+        address1,
+        address2
+    }
+})
+export const getRouteSuccess = (coordinates) => ({
+    type: GET_ROUTE_SUCCESS,
+    payload: coordinates
+})
+export const getRouteFailure = (error) => ({
+    type: GET_ROUTE,
     payload: error
 })

@@ -52,3 +52,13 @@ export const serverRegister = async(email, password, name, surname) => {
     })
         .then(res => res.json())
 }
+
+export const getAddressListFromServer = () => {
+    return fetch("https://loft-taxi.glitch.me/addressList")
+        .then(res => res.json());
+}
+
+export const getRouteFromServer = ({address1, address2}) => {
+    return fetch(`https://loft-taxi.glitch.me/route?address1=${address1}&address2=${address2}`)
+        .then(res => res.json());
+}

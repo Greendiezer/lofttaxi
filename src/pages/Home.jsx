@@ -5,6 +5,9 @@ import { Registration } from '../components/registration';
 import { authenticate, register } from '../actions/actions'
 import {Link} from 'react-router-dom';
 import PropTypes from "prop-types";
+import Paper from '@material-ui/core/Paper';
+import Grid from '@material-ui/core/Grid';
+import "../stylesheets/Home.css"
 
 class Home extends React.Component {
 
@@ -38,21 +41,33 @@ class Home extends React.Component {
         this.setState({ isOldUser: !this.state.isOldUser })
     }
 
+
     render() { 
+        // console.log(this.props)
         return ( 
-            <>
+            <Grid 
+            container
+            spacing={0}
+            alignItems="center"
+            justify="center"
+            style={{ minHeight: "100vh" }}
+            >
                 {this.props.isLoggedIn ? (
                     <p>
                         You are logged in 
                         <Link to="/profile">Go to profile</Link>
                     </p>
                 ) : (
+                    <Grid item xs='auto'>
+                    {
                     this.state.isOldUser ?
                         <Login handleLogin={this.handleLogin} toggleLoginForm={this.toggleLoginForm}/>
                         : 
                         <Registration handleRegistration={this.handleRegistration} toggleLoginForm={this.toggleLoginForm}/>
+                    }
+                    </Grid>
                 )}   
-            </>
+            </Grid>
          );
     }
 }
