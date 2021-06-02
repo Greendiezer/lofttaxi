@@ -19,7 +19,7 @@ class App extends React.Component {
       <>
         {this.props.isLoggedIn ? <Header selectPage={this.selectPage}/> : null}
         <main>
-          <section>
+          <section className="wrapper">
             <Switch>
               <Route exact path="/" component={HomeWithAuth} {...this.props}/>
               <PrivateRoute  path="/map" component={MapWithAuth} {...this.props} />
