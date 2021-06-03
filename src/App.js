@@ -1,34 +1,31 @@
 import React from 'react';
-import Map from './components/map';
-import { Login } from './components/login';
-import Profile from './components/profile';
-import Header from './components/header'
+import Map, { MapWithAuth } from './pages/Map';
+import { HomeWithAuth } from './pages/Home';
+import {ProfileWithAuth} from './pages/Profile';
+import Header from './components/header';
+import PropTypes from "prop-types";
+import {connect} from 'react-redux'
+import {Switch, Route} from 'react-router-dom'
+import {PrivateRoute} from './components/PrivateRoute'
 import './App.css';
 
-
 class App extends React.Component {
-  state = {  
-    activePage:''
+  static propTypes = {
+    isLoggedIn: PropTypes.bool
   }
-
-  selectPage = (page) => {
-    this.setState({activePage: page})
-  };
-  
   
   render() { 
     return (
       <>
-        <Header selectPage={this.selectPage}/>
+        {this.props.isLoggedIn ? <Header selectPage={this.selectPage}/> : null}
         <main>
-          <section>
-            {
-              {
-                map: <Map />,
-                profile: <Profile />,
-                login: <Login selectPage={this.selectPage}/>
-              }[this.state.activePage]
-            }
+          <section className="wrapper">
+            <Switch>
+              <Route exact path="/" component={HomeWithAuth} {...this.props}/>
+              <PrivateRoute  path="/map" component={MapWithAuth} {...this.props} />
+              <PrivateRoute  path="/profile" component={ProfileWithAuth} {...this.props}/>
+            </Switch>
+
           </section>
         </main>
       </>
@@ -36,6 +33,8 @@ class App extends React.Component {
   }
 }
 
-export default App;
+export default connect(
+  state => ({isLoggedIn: state.auth.isLoggedIn})
+)(App);
 
 
