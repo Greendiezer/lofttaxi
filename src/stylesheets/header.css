@@ -1,0 +1,17 @@
+#header {
+    background-color: white;
+    color: black;
+}
+.header__block {
+    justify-content: space-between;
+}
+.header__link{
+    text-decoration: none;
+    color: rgba(0,0,0,1);
+}
+.header__link:hover{
+    color: rgba(0,0,0,1);
+}
+.header__link:active{
+    color: rgba(0,0,0,1);
+}

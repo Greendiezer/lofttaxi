@@ -1,0 +1,22 @@
+#map {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+}
+
+.address__block{
+        top: 50px;
+        left: 20px;
+        padding: 44px 60px;
+        position: absolute;
+        min-width: 415px;
+        max-width: 30%;
+        margin-top: 24px;
+        margin-bottom: 24px;
+        z-index: 99;
+}
+
+.address__select{
+    width: 100%;
+}
