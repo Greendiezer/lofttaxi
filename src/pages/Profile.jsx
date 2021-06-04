@@ -62,12 +62,14 @@ const Profile = ({ token, cardData, error, isLoading, getCard, unauthenticate, l
                         
                         <div className="">
                             <form className="card__form" onSubmit={handlePostCardData}>
-                                <Grid container
+                                <Grid 
+                                    container
                                     alignItems="center"
                                     spacing={4}
                                 >
                                     <Grid item xs={12}>
-                                        <Grid container
+                                        <Grid 
+                                            container
                                             direction="row"
                                             justify="center"
                                             spacing={4}
@@ -89,7 +91,7 @@ const Profile = ({ token, cardData, error, isLoading, getCard, unauthenticate, l
                                                 </Card>
                                             </Grid>
                                         </Grid>
-                                        <Grid align="center" spacing={4}>
+                                        <Grid container align="center" spacing={4}>
                                             <Button type="submit" color="primary" variant="contained" style={{marginTop: "24px"}}>Сохранить</Button>
                                         </Grid>
                                     </Grid>

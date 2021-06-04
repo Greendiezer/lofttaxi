@@ -107,50 +107,53 @@ const Map = ({ token, cardData, error, isLoading, getCard, addresses, getAddress
         if (map.current.getLayer("mapRoute")) {
 
             map.current.removeLayer("mapRoute")
-            map.current.flyTo({
-                center: [30.3056504, 59.9429126],
-                zoom: 15
-            });
+             
         }
+        if (map.current.getSource("mapRoute")){
+
+            map.current.removeSource("mapRoute");
+
+        }
+
+        map.current.flyTo({
+            center: [30.3056504, 59.9429126],
+            zoom: 15
+        });
         
     }
 
     const drawRoute = (map, coordinates) => {
+        
         map.current.flyTo({
             center: coordinates[0],
             zoom: 15
         });
 
-        if (map.current.getLayer("mapRoute")) {
-
-            map.current.removeLayer("mapRoute")
-
-        } else {
-            map.current.addLayer({
-                id: "mapRoute",
-                type: "line",
-                source: {
-                    type: "geojson",
-                    data: {
-                        type: "Feature",
-                        properties: {},
-                        geometry: {
-                            type: "LineString",
-                            coordinates
-                        }
+        map.current.addLayer({
+            id: "mapRoute",
+            type: "line",
+            source: {
+                type: "geojson",
+                data: {
+                    type: "Feature",
+                    properties: {},
+                    geometry: {
+                        type: "LineString",
+                        coordinates
                     }
-                },
-                layout: {
-                    "line-join": "round",
-                    "line-cap": "round"
-                },
-                paint: {
-                    "line-color": "#ffc617",
-                    "line-width": 8
                 }
-            });
+            },
+            layout: {
+                "line-join": "round",
+                "line-cap": "round"
+            },
+            paint: {
+                "line-color": "#ffc617",
+                "line-width": 8
+            }
+        });
 
-        }
+        
         
 
         
@@ -184,62 +187,77 @@ const Map = ({ token, cardData, error, isLoading, getCard, addresses, getAddress
                             :
                                 <Grid
                                     container
-                                    spacing={0}
+                                    spacing={3}
                                     direction="column"
-                                    alignItems="center"
-                                    justify="center"
+
                                 >
-                                    <TextField
-                                        id=""
-                                        select
-                                        label="Откуда"
-                                        value={addressFrom}
-                                        onChange={handleChangeAddressFrom}
-                                        className="address__select"
+                                    <Grid 
+                                    item
+                                    xs={12}
                                     >
-                                        {
-                                            addressList.map(
-                                                (option) => {
-                                                    if (option !== addressTo) {
-                                                        return (
-                                                            <MenuItem value={option}>
-                                                                {option}
-                                                            </MenuItem>
-                                                        )
+                                        <TextField
+                                            id=""
+                                            select
+                                            label="Откуда"
+                                            value={addressFrom}
+                                            onChange={handleChangeAddressFrom}
+                                            className="address__select"
+                                        >
+                                            {
+                                                addressList.map(
+                                                    (option) => {
+                                                        if (option !== addressTo) {
+                                                            return (
+                                                                <MenuItem value={option}>
+                                                                    {option}
+                                                                </MenuItem>
+                                                            )
+                                                        }
                                                     }
-                                                }
-                                            )
-                                        }
-                                    </TextField>
-                                    <TextField
-                                        id=""
-                                        select
-                                        label="Куда"
-                                        value={addressTo}
-                                        onChange={handleChangeAddressTo}
-                                        className="address__select"
+                                                )
+                                            }
+                                        </TextField>
+                                    </Grid>
+                                    <Grid 
+                                    item
+                                    xs={12}
                                     >
-                                        {
-                                            addressList.map(
-                                                (option) => {
-                                                    if (option !== addressFrom) {
-                                                        return (
-                                                            <MenuItem value={option}>
-                                                                {option}
-                                                            </MenuItem>
-                                                        )
+                                        <TextField
+                                            id=""
+                                            select
+                                            label="Куда"
+                                            value={addressTo}
+                                            onChange={handleChangeAddressTo}
+                                            className="address__select"
+                                        >
+                                            {
+                                                addressList.map(
+                                                    (option) => {
+                                                        if (option !== addressFrom) {
+                                                            return (
+                                                                <MenuItem value={option}>
+                                                                    {option}
+                                                                </MenuItem>
+                                                            )
+                                                        }
                                                     }
-                                                }
-                                            )
-                                        }
-                                    </TextField>
-                                    <Button
-                                        onClick={handleCallTaxi}
-                                        color="primary"
-                                        variant="contained"
+                                                )
+                                            }
+                                        </TextField>
+                                    </Grid>
+                                    <Grid 
+                                    item
+                                    xs={12}
                                     >
-                                        Вызвать такси
-                                    </Button>
+                                        <Button
+                                            onClick={handleCallTaxi}
+                                            color="primary"
+                                            variant="contained"
+                                            fullWidth
+                                        >
+                                            Вызвать такси
+                                        </Button>
+                                    </Grid>
                                 </Grid>                                
                             }
                             
