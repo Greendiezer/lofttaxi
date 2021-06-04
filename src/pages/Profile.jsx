@@ -53,37 +53,74 @@ const Profile = ({ token, cardData, error, isLoading, getCard, unauthenticate, l
             className="profile__section"
             >
                 <Card className="profile__block">
-                    <CardContent>
+                    
+                    <CardContent align="center">
                     <h1>Профиль</h1>
-                    <h2>Введите платежные данные</h2>
+                    <p>Способ оплаты</p>
                     {isLoading && <h2>Загрузка...</h2>}
                     <div className="card__block">
                         
-                        <div className="card__area_left">
-                            <Card>
-                                <CardContent>
-                                    <form className="card__form" onSubmit={handlePostCardData}>                                
-                                        <TextField className="card__field" required label="Имя владельца" name="cardName" value={cardName} onChange={e => setCardName(e.target.value)}/>
-                                        <TextField className="card__field" required id="cardNumber" label="Номер карты" name="cardNumber" value={cardNumber} onChange={e => setCardNumber(e.target.value)}/>
-                                        <TextField className="card__field" required id="expiryDate" label="MM/YY" name="expiryDate" value={expiryDate} onChange={e => setExpiryDate(e.target.value)}/>
-                                        <TextField className="card__field" required id="cvc" label="CVC" name="cvc" value={cvc} onChange={e => setCvc(e.target.value)}/>
-                                        <Button type="submit">Сохранить</Button>
-                                    </form>
-                                </CardContent>
-                            </Card>
-                        </div>
-                        
-                        <div className="card__area_rigth">
-                            <Card>
-                                <CardContent>
-                                        <div className="card__row">{cardData.expiryDate}</div>
-                                        <div className="card__row">{cardData.cardNumber}</div>
-                                        <div className="card__row">{cardData.cvc}</div>
-                                </CardContent>
-                            </Card>
+                        <div className="">
+                            <form className="card__form" onSubmit={handlePostCardData}>
+                                <Grid container
+                                    alignItems="center"
+                                    spacing={4}
+                                >
+                                    <Grid item xs={12}>
+                                        <Grid container
+                                            direction="row"
+                                            justify="center"
+                                            spacing={4}
+                                        >
+                                            <Grid item xs={6}>
+                                                <Card>
+                                                    <CardContent>
+                                                        <TextField className="card__field" required id="cardNumber" label="Номер карты" name="cardNumber" value={cardNumber} onChange={e => setCardNumber(e.target.value)} />
+                                                        <TextField className="card__field" required id="expiryDate" label="MM/YY" name="expiryDate" value={expiryDate} onChange={e => setExpiryDate(e.target.value)} />
+                                                    </CardContent>
+                                                </Card>
+                                            </Grid>
+                                            <Grid item xs={6}>
+                                                <Card>
+                                                    <CardContent>
+                                                        <TextField className="card__field" required label="Имя владельца" name="cardName" value={cardName} onChange={e => setCardName(e.target.value)} />
+                                                        <TextField className="card__field" required id="cvc" label="CVC" name="cvc" value={cvc} onChange={e => setCvc(e.target.value)} />
+                                                    </CardContent>
+                                                </Card>
+                                            </Grid>
+                                        </Grid>
+                                        <Grid align="center" spacing={4}>
+                                            <Button type="submit" color="primary" variant="contained" style={{marginTop: "24px"}}>Сохранить</Button>
+                                        </Grid>
+                                    </Grid>
+                                </Grid>
+
+                                {/* <Grid
+                                    container
+                                    spacing={3}
+                                    direction="row"
+                                >
+                                    <Grid item>
+                                        <Card>
+                                            <CardContent>                            
+                                                <TextField className="card__field" required id="cardNumber" label="Номер карты" name="cardNumber" value={cardNumber} onChange={e => setCardNumber(e.target.value)}/>
+                                                <TextField className="card__field" required id="expiryDate" label="MM/YY" name="expiryDate" value={expiryDate} onChange={e => setExpiryDate(e.target.value)}/>
+                                            </CardContent>
+                                        </Card>
+                                    </Grid>
+                                    <Grid item>
+                                        <Card>
+                                            <CardContent>                                                                            
+                                                <TextField className="card__field" required label="Имя владельца" name="cardName" value={cardName} onChange={e => setCardName(e.target.value)}/>
+                                                <TextField className="card__field" required id="cvc" label="CVC" name="cvc" value={cvc} onChange={e => setCvc(e.target.value)}/>                                                                                            
+                                            </CardContent>
+                                        </Card>
+                                    </Grid>
+                                    <Button type="submit">Сохранить</Button>
+                                </Grid> */}
+                            </form>  
                         </div>
                     </div>
-                    <button onClick={unauthenticate}>Log out</button>
                     </CardContent>
                 </Card>
             </Grid>

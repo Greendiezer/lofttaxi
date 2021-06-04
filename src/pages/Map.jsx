@@ -1,9 +1,11 @@
 import React, { useRef, useEffect, useState} from 'react';
 import { connect } from 'react-redux';
 import { Input, TextField, Card, Paper, Button, MenuItem, Grid, Typography } from '@material-ui/core';
+import { Link } from 'react-router-dom'
 import { getAddressList, getCard, getRoute } from '../actions/actions'
 import mapboxgl from 'mapbox-gl';
-import "../stylesheets/Map.css"
+import "../stylesheets/Map.css";
+import 'mapbox-gl/dist/mapbox-gl.css';
 
 mapboxgl.accessToken = "pk.eyJ1IjoiZ3JlZW5kaWV6ZXIiLCJhIjoiY2tvZnNnbXB6MHBmeTJ2czkxYmoydGF2ZyJ9.4y8MsdOD5u8zx62cuqoHgA";
 
@@ -63,6 +65,7 @@ const Map = ({ token, cardData, error, isLoading, getCard, addresses, getAddress
             center: [30.3056504, 59.9429126],
             zoom: 12
         });
+
     });
 
     const handleChangeAddressFrom = (event) => {
@@ -94,17 +97,22 @@ const Map = ({ token, cardData, error, isLoading, getCard, addresses, getAddress
             address1: addressFrom,
             address2: addressTo
         }
+
         drawRoute(map, route)
         setActiveOrder(true)
     }
 
     const cancelOrder = () => {
         setActiveOrder(false)
-        map.current.removeLayer("route")
-        map.current.flyTo({
-            center: [30.3056504, 59.9429126],
-            zoom: 15
-        });
+        if (map.current.getLayer("mapRoute")) {
+
+            map.current.removeLayer("mapRoute")
+            map.current.flyTo({
+                center: [30.3056504, 59.9429126],
+                zoom: 15
+            });
+        }
+        
     }
 
     const drawRoute = (map, coordinates) => {
@@ -113,31 +121,40 @@ const Map = ({ token, cardData, error, isLoading, getCard, addresses, getAddress
             zoom: 15
         });
 
-        map.current.addLayer({
-            id: "route",
-            type: "line",
-            source: {
-                type: "geojson",
-                data: {
-                    type: "Feature",
-                    properties: {},
-                    geometry: {
-                        type: "LineString",
-                        coordinates
-                    }
-                }
-            },
-            layout: {
-                "line-join": "round",
-                "line-cap": "round"
-            },
-            paint: {
-                "line-color": "#ffc617",
-                "line-width": 8
-            }
-        });
-    };
+        if (map.current.getLayer("mapRoute")) {
 
+            map.current.removeLayer("mapRoute")
+
+        } else {
+            map.current.addLayer({
+                id: "mapRoute",
+                type: "line",
+                source: {
+                    type: "geojson",
+                    data: {
+                        type: "Feature",
+                        properties: {},
+                        geometry: {
+                            type: "LineString",
+                            coordinates
+                        }
+                    }
+                },
+                layout: {
+                    "line-join": "round",
+                    "line-cap": "round"
+                },
+                paint: {
+                    "line-color": "#ffc617",
+                    "line-width": 8
+                }
+            });
+
+        }
+        
+
+        
+    };
 
 
         return ( 
@@ -152,7 +169,6 @@ const Map = ({ token, cardData, error, isLoading, getCard, addresses, getAddress
                                     container
                                     spacing={0}
                                     direction="column"
-
                                     justify="center"
                                 >
                                     <Typography variant="h4" gutterBottom>
@@ -219,6 +235,8 @@ const Map = ({ token, cardData, error, isLoading, getCard, addresses, getAddress
                                     </TextField>
                                     <Button
                                         onClick={handleCallTaxi}
+                                        color="primary"
+                                        variant="contained"
                                     >
                                         Вызвать такси
                                     </Button>
@@ -227,7 +245,26 @@ const Map = ({ token, cardData, error, isLoading, getCard, addresses, getAddress
                             
                         </Paper> 
                         :
-                        null                    
+                        <Paper className="address__block">
+                            <Grid
+                                container
+                                direction="column"
+                                justify="center"
+                            >
+                                <h3> Заполните данные карты в профиле, чтобы сделать заказ.</h3>
+                                <Link to="/profile" className="header__link">
+                                    <Button 
+                                        color="primary"
+                                        variant="contained"
+                                        align="center"
+                                        fullWidth
+                                    >
+                                        Перейти в профиль
+                                    </Button>
+                                </Link>
+                            </Grid>
+                        </Paper>      
+                            
                     }
                 </div>
             </div>

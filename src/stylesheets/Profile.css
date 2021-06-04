@@ -1,3 +1,7 @@
 .profile__section{
     background-image: url(../assets/login-background.jpg);
 }
+
+.card__button{
+    margin-top: 24px;
+}

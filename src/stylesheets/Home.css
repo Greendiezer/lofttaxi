@@ -1,6 +1,31 @@
 .form__block{
     display: flex;
     flex-direction: column;
-    max-width: 300px;
+    max-width: 480px;
     margin: 0 auto;
+    padding: 44px 60px;
+    /* min-width: 480px; */
+}
+
+.form__row{
+    width: 100%;
+}
+.form__rowToLeft {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.form__rowToRight{
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+}
+
+.link{
+    color: blue;
+    cursor: pointer;
+}
+
+.link:hover {
+    text-decoration: underline;
 }

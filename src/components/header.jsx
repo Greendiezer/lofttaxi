@@ -5,6 +5,8 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import { Link } from 'react-router-dom'
 import PropTypes from "prop-types";
+import { connect } from 'react-redux';
+import { logOut } from '../actions/actions'
 import {Logo, MCIcon} from 'loft-taxi-mui-theme';
 import "../stylesheets/header.css"
 
@@ -12,6 +14,10 @@ class Header extends React.Component {
 
     static propTypes = {
         selectPage: PropTypes.func
+    }
+
+    unauthenticate = () => {
+        this.props.logOut();
     }
 
     render() { 
@@ -23,15 +29,15 @@ class Header extends React.Component {
                         <Logo />
                     </div>
                     <nav className="header__menu">
-                        <Link to="/" className="header__link">
-                            <Button aria-disabled="false">Логин</Button>
-                        </Link>
                         <Link to="/map" className="header__link">
                             <Button >Карта</Button>
                         </Link>
                         <Link to="/profile" className="header__link">
                             <Button >Профиль</Button>
                         </Link>
+                        <Button className="header__link" onClick={this.unauthenticate}>
+                            Выйти
+                        </Button>
                     </nav>
                 </Toolbar>
 
@@ -40,5 +46,9 @@ class Header extends React.Component {
         );
     }
 }
- 
-export default Header;
+
+const mapStateToProps = (state) => ({isLoggedIn: state.auth.isLoggedIn});
+const mapDispatchToProps = {
+    logOut
+}
+export const HeaderWithAuth = connect(mapStateToProps, mapDispatchToProps)(Header);

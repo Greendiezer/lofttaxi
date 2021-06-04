@@ -15,6 +15,7 @@ export default function(state = initialState, action) {
             return{...state, isLoggedIn: false, error: action.payload}
         }
         case LOG_OUT: {
+            localStorage.removeItem('token')
             return{...state, isLoggedIn: false, token: ''}
         }
         case REGISTER_ERROR: {

@@ -2,7 +2,7 @@ import React from 'react';
 import Map, { MapWithAuth } from './pages/Map';
 import { HomeWithAuth } from './pages/Home';
 import {ProfileWithAuth} from './pages/Profile';
-import Header from './components/header';
+import {HeaderWithAuth} from './components/header';
 import PropTypes from "prop-types";
 import {connect} from 'react-redux'
 import {Switch, Route} from 'react-router-dom'
@@ -17,7 +17,7 @@ class App extends React.Component {
   render() { 
     return (
       <>
-        {this.props.isLoggedIn ? <Header selectPage={this.selectPage}/> : null}
+        {this.props.isLoggedIn ? <HeaderWithAuth selectPage={this.selectPage}/> : null}
         <main>
           <section className="wrapper">
             <Switch>
